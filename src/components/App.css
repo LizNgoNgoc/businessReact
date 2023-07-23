@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+
+.app {
+  /* padding: 72px 236px; */
+  position: relative;
+  overflow: hidden;
+  background-image: url(/public/img/background1921.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+main{
+  margin: auto;
+  max-width: 1448px;
+}
+
+@media screen and (max-width: 1366px) {
+    .app {
+      padding: 0 72px;
+      background-image: url(/public/img/back740.png); 
+    }
+}
+
+
+@media screen and (max-width: 425px) {
+  .app {
+    padding: 0 15px;
+    background-image: url(/public/img/back320.png);
+  }
+}
+
+

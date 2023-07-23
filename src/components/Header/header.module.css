@@ -1,0 +1,86 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1448px;
+    margin-top: 100px;
+}
+
+.logo {
+    background-image: url(/public/img/header_.png);
+    width: 526px;
+    height: 48px;
+    display: block;
+}
+
+.links{
+    display: flex;
+    gap: 16px;
+}
+
+.link {
+    width: 48px;
+    height: 48px;
+}
+
+.tg { 
+    background-image: url(/public/img/tg_img.png);
+}
+
+.pic {
+    background-image: url(/public/img/pic_img.png);
+}
+
+.skype {
+    background-image: url(/public/img/skype_img.png); 
+}
+
+.mess {
+    background-image: url(/public/img/mess_img.png); 
+}
+
+@media screen and (max-width: 1024px) {
+    header {
+        width: 840px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .logo {
+        width: 288px;
+        background-size: cover;
+        height: 26px;
+    }
+
+    .link {
+        width: 36px;
+        height: 36px;
+        background-size: cover;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+    header {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .links {
+        display: none;
+    }
+
+    .logo {
+        background-image: url(/public/img/logo_320.png);
+        background-size: cover;
+        display: block;
+        width: 100px;
+        height: 38px;
+    }
+}
+

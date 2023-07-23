@@ -1,0 +1,53 @@
+.section {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    z-index: 9999;
+}
+
+.openModal {
+    display: block;
+}
+
+.content {
+    width: 468px;
+    border-radius: 8px;
+    background: #FAFAFA;
+    position: absolute;
+    padding: 59px 40px 72px 40px;
+    box-sizing: border-box;
+    border: 4px solid #EBEBEB;
+    left: 0;right: 0; top: 0;bottom: 0;
+    margin: auto;
+    max-height: 600px;
+    box-sizing: border-box;
+}
+
+.text {
+    margin: 0;
+    font-family: TT Firs Neue;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.btn_price {
+    background-color: #F96D6B;
+    border: 0;
+    height: 68px;
+    padding: 0 10px;
+    border-radius: 8px;
+    color: white;
+    font-family: TT Firs Neue;
+    font-size: 36px;
+    font-weight: 400;
+    position: absolute;
+    bottom: -34px;
+    left: 40px;
+}

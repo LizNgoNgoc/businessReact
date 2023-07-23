@@ -1,0 +1,9 @@
+main {
+    margin: auto;
+}
+
+@media screen and (max-width: 425px) {
+    main {
+        margin: 0 auto 249px;
+    }
+}

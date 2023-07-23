@@ -1,7 +1,7 @@
 import styles from './form.module.css'
 import { arrSlides } from '../../service/Slide'
 import { useEffect, useRef, useState } from 'react'
-
+import { Validation } from '../../service/validation'
 
 
     const settings = {
@@ -16,15 +16,34 @@ import { useEffect, useRef, useState } from 'react'
 
 
 export default function Form() {
+    const [message, setMessage] = useState({
+        name: '',
+        mail: '',
+        comment: ''
+    })
     let [count, setCount] = useState(0)
     const [arrSlide, setArrSlides] = useState(arrSlides)
     const ref = useRef(null)
     const width = ref.current ? ref.current.clientWidth : 0
+
     useEffect(() => {
         setInterval(()=> {
             count < arrSlide.length - 1 ? setCount(++count) : setCount(count = 0)
         }, 3000)
     }, [])
+
+    function handleChange(e) {
+        const input = e.target
+        message[input.name] = input.value
+        Validation(input)
+        setMessage(message)
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        console.log(message)
+    }
+
     return(
         <section>
             <div className={styles.banner}>
@@ -36,12 +55,12 @@ export default function Form() {
                 </p>
             </div>
             <div className={styles.form_container}>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className={styles.input_initials}>
-                        <input type="text" className={styles.inp} placeholder='Ваше имя *' />
-                        <input type="text" className={styles.inp} placeholder='Почта или Telegram *' />
+                        <input type="text" value={message.name} className={styles.inp} placeholder='Ваше имя *' onChange={handleChange} name='name' />
+                        <input type="text" value={message.mail} className={styles.inp} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
                     </div>
-                    <textarea type="text" className={styles.inp_comment} placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
+                    <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={handleChange} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
                     <div className={styles.btn_cont}>
                     <button className={styles.btn}>Отправить</button>
                     <p className={styles.politic_txt}>Нажимая кнопку "Отправить" вы соглашаетесь с нашей Политикой данных</p>

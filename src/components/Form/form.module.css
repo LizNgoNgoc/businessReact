@@ -149,6 +149,14 @@
     background-image: url(/public/img/mail_hover.png);
 }
 
+.valid {
+    background-color: green;
+}
+
+.invalid{
+    background-color: red;
+}
+
 @media screen and (max-width: 1366px)  {
     .form_container {
         flex-direction: column-reverse;

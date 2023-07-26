@@ -64,11 +64,12 @@ export default function Form() {
                 <form onSubmit={handleSubmit}>
                     <div className={styles.input_initials}>
                         <input type="text" value={message.name} className={`${styles.inp} ${errorsValid.name ? styles.invalid : ''}`} placeholder='Ваше имя *' onChange={handleChange} name='name' />
-                        {errorsValid.name && <p className={`errorMessedge`}>Error Name</p>}
+                        {errorsValid.name && <p className={`errorMessadge`}>Error Name</p>}
                         <input type="text" value={message.mail} className={`${styles.inp} ${errorsValid.mail ? styles.invalid : ''}`} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
-                        {errorsValid.mail && <p className={`errorMessedge`}>Error Mail</p>}
+                        {errorsValid.mail && <p className={`errorMessadge`}>Error Mail</p>}
                     </div>
                     <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={handleChange} maxLength={150} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
+
                     <div className={styles.btn_cont}>
                     <button disabled={Object.values(errorsValid).includes(true)} className={styles.btn}>Отправить</button>
                     <p className={styles.politic_txt}>Нажимая кнопку "Отправить" вы соглашаетесь с нашей Политикой данных</p>

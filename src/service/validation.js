@@ -11,10 +11,7 @@ function ValidationEmail(validationELement){
 }
 function ValidationName(validationELement){
    const valid = /^[А-ЯЁ][а-яё]+$/;
-   return valid.test(validationELement) ? validationELement.style.borderColor = 'green' : validationELement.style.borderColor = 'red';
-}
-function ValidationString(){
-
+   return valid.test(validationELement) ? false : true
 }
 
 export {Validation}

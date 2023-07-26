@@ -21,6 +21,11 @@ export default function Form() {
         mail: '',
         comment: ''
     })
+    const [errorsValid, setErrorsValid] = useState({
+        name: false,
+        mail: false,
+        comment: false
+    })
     let [count, setCount] = useState(0)
     const [arrSlide, setArrSlides] = useState(arrSlides)
     const ref = useRef(null)
@@ -35,8 +40,9 @@ export default function Form() {
     function handleChange(e) {
         const input = e.target
         message[input.name] = input.value
-        Validation(input)
-        setMessage(message)
+        errorsValid[input.name] = Validation(input)
+        setMessage({...message})
+        setErrorsValid({...errorsValid})
     }
 
     function handleSubmit(e) {
@@ -57,12 +63,14 @@ export default function Form() {
             <div className={styles.form_container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.input_initials}>
-                        <input type="text" value={message.name} className={styles.inp} placeholder='Ваше имя *' onChange={handleChange} name='name' />
-                        <input type="text" value={message.mail} className={styles.inp} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
+                        <input type="text" value={message.name} className={`${styles.inp} ${errorsValid.name ? styles.invalid : ''}`} placeholder='Ваше имя *' onChange={handleChange} name='name' />
+                        {errorsValid.name && <p className={`errorMessedge`}>Error Name</p>}
+                        <input type="text" value={message.mail} className={`${styles.inp} ${errorsValid.mail ? styles.invalid : ''}`} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
+                        {errorsValid.mail && <p className={`errorMessedge`}>Error Mail</p>}
                     </div>
-                    <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={handleChange} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
+                    <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={handleChange} maxLength={150} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
                     <div className={styles.btn_cont}>
-                    <button className={styles.btn}>Отправить</button>
+                    <button disabled={Object.values(errorsValid).includes(true)} className={styles.btn}>Отправить</button>
                     <p className={styles.politic_txt}>Нажимая кнопку "Отправить" вы соглашаетесь с нашей Политикой данных</p>
                     </div>
                 </form>

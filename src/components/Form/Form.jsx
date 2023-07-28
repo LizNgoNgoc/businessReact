@@ -70,10 +70,14 @@ export default function Form() {
             <div className={styles.form_container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.input_initials}>
-                        <input type="text" value={message.name} className={`${styles.inp} ${errorsValid.name ? styles.invalid : ''}`} placeholder='Ваше имя *' onChange={handleChange} name='name' />
-                        {errorsValid.name && <p className={`errorMessadge`}>Error Name</p>}
-                        <input type="text" value={message.mail} className={`${styles.inp} ${errorsValid.mail ? styles.invalid : ''}`} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
-                        {errorsValid.mail && <p className={`errorMessadge`}>Error Mail</p>}
+                        <div className={styles.flexInp}>
+                            <input type="text" value={message.name} className={`${styles.inp} ${errorsValid.name ? styles.invalid : ''}`} placeholder='Ваше имя *' onChange={handleChange} name='name' />
+                            {errorsValid.name && <p className={`errorMessadge ${styles.errorMess}`}>Error Name</p>}
+                        </div>
+                        <div className={styles.flexInp}>
+                            <input type="text" value={message.mail} className={`${styles.inp} ${errorsValid.mail ? styles.invalid : ''}`} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
+                            {errorsValid.mail && <p className={`errorMessadge ${styles.errorMess}`}>Error Mail</p>}
+                        </div>
                     </div>
                     <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={recalculate} maxLength={150} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
                         <p className={styles.countText}>{`Введено символов: ${textAreaCount}/150`}</p>

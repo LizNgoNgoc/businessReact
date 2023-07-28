@@ -165,6 +165,19 @@
     color: #2F2F2F;
 }
 
+.errorMess {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 160%;
+    color: #2F2F2F;
+}
+
+.flexInp {
+    display: flex;
+    flex-direction: column;
+}
+
 @media screen and (max-width: 1366px)  {
     .form_container {
         flex-direction: column-reverse;

@@ -16,6 +16,7 @@ import { Validation } from '../../service/validation'
 
 
 export default function Form() {
+    const [textAreaCount, setTextAteaCount] = useState(0)
     const [message, setMessage] = useState({
         name: '',
         mail: '',
@@ -50,6 +51,12 @@ export default function Form() {
         console.log(message)
     }
 
+    function recalculate(e) {
+        handleChange(e)
+        e.preventDefault()
+        setTextAteaCount(e.target.value.length)
+    }
+
     return(
         <section>
             <div className={styles.banner}>
@@ -68,8 +75,8 @@ export default function Form() {
                         <input type="text" value={message.mail} className={`${styles.inp} ${errorsValid.mail ? styles.invalid : ''}`} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
                         {errorsValid.mail && <p className={`errorMessadge`}>Error Mail</p>}
                     </div>
-                    <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={handleChange} maxLength={150} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
-
+                    <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={recalculate} maxLength={150} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
+                        <p className={styles.countText}>{`Введено символов: ${textAreaCount}/150`}</p>
                     <div className={styles.btn_cont}>
                     <button disabled={Object.values(errorsValid).includes(true)} className={styles.btn}>Отправить</button>
                     <p className={styles.politic_txt}>Нажимая кнопку "Отправить" вы соглашаетесь с нашей Политикой данных</p>

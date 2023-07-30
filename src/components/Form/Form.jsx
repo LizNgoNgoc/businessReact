@@ -1,8 +1,8 @@
 import styles from './form.module.css'
 import { arrSlides } from '../../service/Slide'
 import { useEffect, useRef, useState } from 'react'
-import { Validation } from '../../service/validation'
 
+import ListForm from './ListForm'
 
     const settings = {
         infinite: true,
@@ -16,17 +16,6 @@ import { Validation } from '../../service/validation'
 
 
 export default function Form() {
-    const [textAreaCount, setTextAteaCount] = useState(0)
-    const [message, setMessage] = useState({
-        name: '',
-        mail: '',
-        comment: ''
-    })
-    const [errorsValid, setErrorsValid] = useState({
-        name: false,
-        mail: false,
-        comment: false
-    })
     let [count, setCount] = useState(0)
     const [arrSlide, setArrSlides] = useState(arrSlides)
     const ref = useRef(null)
@@ -37,25 +26,6 @@ export default function Form() {
             count < arrSlide.length - 1 ? setCount(++count) : setCount(count = 0)
         }, 3000)
     }, [])
-
-    function handleChange(e) {
-        const input = e.target
-        message[input.name] = input.value
-        errorsValid[input.name] = Validation(input)
-        setMessage({...message})
-        setErrorsValid({...errorsValid})
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault()
-        console.log(message)
-    }
-
-    function recalculate(e) {
-        handleChange(e)
-        e.preventDefault()
-        setTextAteaCount(e.target.value.length)
-    }
 
     return(
         <section>
@@ -68,24 +38,7 @@ export default function Form() {
                 </p>
             </div>
             <div className={styles.form_container}>
-                <form onSubmit={handleSubmit}>
-                    <div className={styles.input_initials}>
-                        <div className={styles.flexInp}>
-                            <input type="text" value={message.name} className={`${styles.inp} ${errorsValid.name ? styles.invalid : ''}`} placeholder='Ваше имя *' onChange={handleChange} name='name' />
-                            {errorsValid.name && <p className={`errorMessadge ${styles.errorMess}`}>Error Name</p>}
-                        </div>
-                        <div className={styles.flexInp}>
-                            <input type="text" value={message.mail} className={`${styles.inp} ${errorsValid.mail ? styles.invalid : ''}`} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
-                            {errorsValid.mail && <p className={`errorMessadge ${styles.errorMess}`}>Error Mail</p>}
-                        </div>
-                    </div>
-                    <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={recalculate} maxLength={150} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
-                        <p className={styles.countText}>{`Введено символов: ${textAreaCount}/150`}</p>
-                    <div className={styles.btn_cont}>
-                    <button disabled={Object.values(errorsValid).includes(true)} className={styles.btn}>Отправить</button>
-                    <p className={styles.politic_txt}>Нажимая кнопку "Отправить" вы соглашаетесь с нашей Политикой данных</p>
-                    </div>
-                </form>
+                <ListForm/>
                 <div className={styles.container}>
                     <p className={styles.txt}>Отвечаем в течение одного рабочего дня. 
                     Обсудим ваши задачи в удобном для вас средстве связи. Для наиболее конфиден-циальных 

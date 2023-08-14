@@ -53,5 +53,5 @@ export default function ListForm() {
         <button disabled={Object.values(errorsValid).includes(true)} className={styles.btn}>Отправить</button>
         <p className={styles.politic_txt}>Нажимая кнопку "Отправить" вы соглашаетесь с нашей Политикой данных</p>
         </div>
-    </form>
+    </form> 
 }

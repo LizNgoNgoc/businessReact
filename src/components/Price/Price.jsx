@@ -3,19 +3,9 @@ import styles from './price.module.css'
 import { arrCards } from '../../service/Cards'
 import Modal from './Modal'
 import { createPortal } from 'react-dom'
-import { useState } from 'react'
+
 
 export default function Price() {
-    const [modalActive, setModalActive] = useState({
-        show : false,
-        propertyes : {
-            title: null,
-            subtitle: null,
-            price: null
-        }
-    })
-
-    // const cardLong = arrCards[arrCards.length - 1]
 
     return(
         <section className={styles.section}>
@@ -23,7 +13,7 @@ export default function Price() {
                 <div className={styles.cont_block}>
                     {arrCards.map((item, index) => { 
                         const className = index === arrCards.length - 1 ? 'longCard': ''
-                        return <Card setModalActive={setModalActive} className ={className} data={item} key={index}/>
+                        return <Card className ={className} data={item} key={index}/>
                     })}
                     {arrCards.map((item, index) => {
                         return index === arrCards.length - 1 
@@ -35,7 +25,7 @@ export default function Price() {
                     </div>
                 </div>
             </div> 
-            {createPortal(<Modal modalActive={modalActive} setModalActive={setModalActive}/>, document.querySelector('#root'))}
+            {createPortal(<Modal/>, document.querySelector('#root'))}
         </section>
     )
 }

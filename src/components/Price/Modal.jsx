@@ -1,22 +1,15 @@
 import styles from './modal.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { modalNoVisible } from '../../redux/slice/inputSlice'
 
+export default function Modal({}){
+    const dispatch = useDispatch()
+    const modalActive = useSelector((state) => state.inpSlice)
+    const {title, subtitle, price} = modalActive.value
 
-export default function Modal({modalActive, setModalActive}){
-
-    const {title, subtitle, price} = modalActive.propertyes
-
-    function handleModal(){
-        setModalActive({
-            show : false,
-            propertyes : {
-                title: null,
-                subtitle: null,
-                price: null
-            }
-        })
-    }
-
-    return <section onClick={handleModal} className={`${styles.section} ${modalActive.show ? styles.openModal : ''}`}>
+    return <section 
+    onClick={() => dispatch(modalNoVisible())} 
+    className={`${styles.section} ${modalActive.show ? styles.openModal : ''}`}>
         <div className={styles.content} onClick={e => e.stopPropagation()}>
                 <p className={styles.text}>{title}</p>
                 <p className={styles.description}>{subtitle}</p>

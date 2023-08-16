@@ -1,10 +1,14 @@
 import styles from './form.module.css'
 import { Validation } from '../../service/validation'
 import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { recalc } from '../../redux/slice/formSlice'
 
 export default function ListForm() {
 
-    const [textAreaCount, setTextAteaCount] = useState(0)
+    // const [textAreaCount, setTextAteaCount] = useState(0)
+    const textAreaCount = useSelector((state) => state.formSlice.value)
+    const dispatch = useDispatch()
     const [message, setMessage] = useState({
         name: '',
         mail: '',
@@ -32,8 +36,7 @@ export default function ListForm() {
 
     function recalculate(e) {
         handleChange(e)
-        e.preventDefault()
-        setTextAteaCount(e.target.value.length)
+        dispatch(recalc(e.target.value.length))
     }
 
     return <form onSubmit={handleSubmit}>

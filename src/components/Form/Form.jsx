@@ -1,29 +1,20 @@
 import styles from './form.module.css'
 import { arrSlides } from '../../service/Slide'
 import { useEffect, useRef, useState } from 'react'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { counter } from '../../redux/slice/countSlice'
 import ListForm from './ListForm'
 
-    const settings = {
-        infinite: true,
-        dots: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        lazyLoad: true,
-        autoplay: true,
-        autoplaySpeed: 2000,
-    }
-
-
 export default function Form() {
-    let [count, setCount] = useState(0)
+    // let [count, setCount] = useState(0)
+    const count = useSelector((state) => {return state.countSlice.value})
     const [arrSlide, setArrSlides] = useState(arrSlides)
     const ref = useRef(null)
     const width = ref.current ? ref.current.clientWidth : 0
-
+    const dispatch = useDispatch()
     useEffect(() => {
         setInterval(()=> {
-            count < arrSlide.length - 1 ? setCount(++count) : setCount(count = 0)
+            dispatch(counter(arrSlide.length))
         }, 3000)
     }, [])
 

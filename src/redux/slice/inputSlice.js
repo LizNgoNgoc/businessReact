@@ -5,7 +5,10 @@ const initialState = {
     value : {
         title: null,
         subtitle: null,
-        price: null
+        price: null,
+        name : '',
+        mail : '',
+        comment : ''
     }
 };
 
@@ -18,9 +21,12 @@ const inpAction = createSlice({
         },
         modalNoVisible : (state) => {
           return state = {...initialState}
+        },
+        messageInp : (state, action) => { 
+            return state = {...initialState, value : {...action.payload}}
         }
     }
 })
 
-export const {modalVisible, modalNoVisible} = inpAction.actions
+export const {modalVisible, modalNoVisible, messageInp} = inpAction.actions
 export default inpAction.reducer

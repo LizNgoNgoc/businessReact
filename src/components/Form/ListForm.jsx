@@ -3,17 +3,22 @@ import { Validation } from '../../service/validation'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { recalc } from '../../redux/slice/formSlice'
+import { messageInp } from '../../redux/slice/inputSlice' //import slice
+
 
 export default function ListForm() {
+
+    const dispatchMess = useDispatch() // create a Dispatch
+    const {name, mail, comment} = '' // get a mentions
 
     // const [textAreaCount, setTextAteaCount] = useState(0)
     const textAreaCount = useSelector((state) => state.formSlice.value)
     const dispatch = useDispatch()
-    const [message, setMessage] = useState({
-        name: '',
-        mail: '',
-        comment: ''
-    })
+    // const [message, setMessage] = useState({
+    //     name: '',
+    //     mail: '',
+    //     comment: ''
+    // })
     
     const [errorsValid, setErrorsValid] = useState({
         name: false,
@@ -23,15 +28,16 @@ export default function ListForm() {
 
     function handleChange(e) {
         const input = e.target
-        message[input.name] = input.value
-        errorsValid[input.name] = Validation(input)
-        setMessage({...message})
+        //message[input.name] = input.value
+        errorsValid[input.name] = Validation(input) 
+        //setMessage({...message})
         setErrorsValid({...errorsValid})
+        dispatchMess(messageInp(input.value)) //get the Dispatch
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(message)
+        //console.log(message)
     }
 
     function recalculate(e) {
@@ -42,15 +48,15 @@ export default function ListForm() {
     return <form onSubmit={handleSubmit}>
         <div className={styles.input_initials}>
             <div className={styles.flexInp}>
-                <input type="text" value={message.name} className={`${styles.inp} ${errorsValid.name ? styles.invalid : ''}`} placeholder='Ваше имя *' onChange={handleChange} name='name' />
+                <input type="text" value={name} className={`${styles.inp} ${errorsValid.name ? styles.invalid : ''}`} placeholder='Ваше имя *' onChange={handleChange} name='name' />
                 {errorsValid.name && <p className={`errorMessadge ${styles.errorMess}`}>Error Name</p>}
             </div>
             <div className={styles.flexInp}> 
-                <input type="text" value={message.mail} className={`${styles.inp} ${errorsValid.mail ? styles.invalid : ''}`} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
+                <input type="text" value={mail} className={`${styles.inp} ${errorsValid.mail ? styles.invalid : ''}`} placeholder='Почта или Telegram *' onChange={handleChange} name='mail'/>
                 {errorsValid.mail && <p className={`errorMessadge ${styles.errorMess}`}>Error Mail</p>}
             </div> 
         </div>
-        <textarea type="text" value={message.comment} className={styles.inp_comment} onChange={recalculate} maxLength={150} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
+        <textarea type="text" value={comment} className={styles.inp_comment} onChange={recalculate} maxLength={150} name='comment' placeholder='Опишите ваш задачу или задайте вопрос'></textarea>
             <p className={styles.countText}>{`Введено символов: ${textAreaCount}/150`}</p>
         <div className={styles.btn_cont}>
         <button disabled={Object.values(errorsValid).includes(true)} className={styles.btn}>Отправить</button>

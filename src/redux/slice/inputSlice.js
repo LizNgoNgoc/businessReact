@@ -24,7 +24,7 @@ const inpAction = createSlice({
         },
         messageInp : (state, action) => { 
             return state = {...initialState, value : {...action.payload}}
-        }
+        } 
     }
 })
 

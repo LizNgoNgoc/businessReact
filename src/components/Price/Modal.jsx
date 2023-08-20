@@ -4,12 +4,14 @@ import { modalNoVisible } from '../../redux/slice/inputSlice'
 
 export default function Modal({}){
     const dispatch = useDispatch()
-    const modalActive = useSelector((state) => state.inpSlice)
-    const {title, subtitle, price} = modalActive.value
+    const modalActive = useSelector((state) => state.inpSlice.value)
+    console.log(modalActive);
+    
+    const {title, subtitle, price, show} = modalActive.modal
 
     return <section 
     onClick={() => dispatch(modalNoVisible())} 
-    className={`${styles.section} ${modalActive.show ? styles.openModal : ''}`}>
+    className={`${styles.section} ${show ? styles.openModal : ''}`}>
         <div className={styles.content} onClick={e => e.stopPropagation()}>
                 <p className={styles.text}>{title}</p>
                 <p className={styles.description}>{subtitle}</p>

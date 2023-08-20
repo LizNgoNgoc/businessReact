@@ -1,14 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    show : false,
     value : {
-        title: null,
-        subtitle: null,
-        price: null,
-        name : '',
-        mail : '',
-        comment : ''
+        modal: {
+            show : false,
+            title: '',
+            subtitle: '',
+            price: '',
+        },
+        inputs : {
+            name : '',
+            mail : '',
+            comment : ''
+        }
     }
 };
 
@@ -17,13 +21,21 @@ const inpAction = createSlice({
     initialState,
     reducers : {
         modalVisible : (state, action) => {
-            return  state = {...initialState, show : true, value : {...action.payload }}
+            const {inputs} = initialState.value
+            return  state = {...initialState, value : {
+                inputs,
+                modal : {...action.payload, show : true}
+            }}
         },
         modalNoVisible : (state) => {
-          return state = {...initialState}
+          return state = {...initialState, show : false}
         },
         messageInp : (state, action) => { 
-            return state = {...initialState, value : {...action.payload}}
+            const {modal, inputs} = initialState.value
+            return state = {...initialState, value : {
+                modal, 
+                inputs : {...inputs, ...action.payload}
+            }}
         } 
     }
 })

@@ -11,14 +11,9 @@ export default function ListForm() {
     const dispatchMess = useDispatch() // create a Dispatch
     const {name, mail, comment} = '' // get a mentions
 
-    // const [textAreaCount, setTextAteaCount] = useState(0)
     const textAreaCount = useSelector((state) => state.formSlice.value)
     const dispatch = useDispatch()
-    // const [message, setMessage] = useState({
-    //     name: '',
-    //     mail: '',
-    //     comment: ''
-    // })
+    const inputs = useSelector(state => state.inpSlice.value.inputs)
     
     const [errorsValid, setErrorsValid] = useState({
         name: false,
@@ -32,7 +27,7 @@ export default function ListForm() {
         errorsValid[input.name] = Validation(input) 
         //setMessage({...message})
         setErrorsValid({...errorsValid})
-        dispatchMess(messageInp(input.value)) //get the Dispatch
+        dispatch(messageInp({[input.name] : input.value})) //get the Dispatch
     }
 
     function handleSubmit(e) {

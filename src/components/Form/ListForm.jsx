@@ -3,36 +3,41 @@ import { Validation } from '../../service/validation'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { recalc } from '../../redux/slice/formSlice'
-import { messageInp } from '../../redux/slice/inputSlice' //import slice
+import { setForm } from '../../redux/slice/inputSlice'
+import { clearForm } from '../../redux/slice/inputSlice'
 
 
 export default function ListForm() {
-
-    const dispatchMess = useDispatch() // create a Dispatch
-    const {name, mail, comment} = '' // get a mentions
-
+    const [message, setMessage] = useState({
+        name : '',
+        mail : '',
+        comment : ''
+    })
+    const {name, mail, comment} = message // get a mentions
     const textAreaCount = useSelector((state) => state.formSlice.value)
     const dispatch = useDispatch()
-    const inputs = useSelector(state => state.inpSlice.value.inputs)
-    
     const [errorsValid, setErrorsValid] = useState({
         name: false,
         mail: false,
         comment: false
     })
+    const form = useSelector((state) => state.inpSlice.value.form)
 
     function handleChange(e) {
         const input = e.target
-        //message[input.name] = input.value
+        message[input.name] = input.value
         errorsValid[input.name] = Validation(input) 
-        //setMessage({...message})
+        setMessage({...message}) 
         setErrorsValid({...errorsValid})
-        dispatch(messageInp({[input.name] : input.value})) //get the Dispatch
+        console.log(errorsValid);
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        //console.log(message)
+        dispatch(setForm(message))
+        dispatch(clearForm(message))
+        setMessage({name:'', mail:'', comment: ''})
+        console.log(form)
     }
 
     function recalculate(e) {

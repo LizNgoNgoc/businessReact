@@ -6,7 +6,6 @@ import { counter } from '../../redux/slice/countSlice'
 import ListForm from './ListForm'
 
 export default function Form() {
-    // let [count, setCount] = useState(0)
     const count = useSelector((state) => {return state.countSlice.value})
     const [arrSlide, setArrSlides] = useState(arrSlides)
     const ref = useRef(null)

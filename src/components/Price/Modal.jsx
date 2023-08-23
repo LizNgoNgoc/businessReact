@@ -5,7 +5,6 @@ import { modalNoVisible } from '../../redux/slice/inputSlice'
 export default function Modal({}){
     const dispatch = useDispatch()
     const modalActive = useSelector((state) => state.inpSlice.value)
-    console.log(modalActive);
     
     const {title, subtitle, price, show} = modalActive.modal
 

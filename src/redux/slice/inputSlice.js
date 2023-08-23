@@ -8,7 +8,7 @@ const initialState = {
             subtitle: '',
             price: '',
         },
-        inputs : {
+        form : {
             name : '',
             mail : '',
             comment : ''
@@ -21,24 +21,28 @@ const inpAction = createSlice({
     initialState,
     reducers : {
         modalVisible : (state, action) => {
-            const {inputs} = initialState.value
+            const {form} = initialState.value
             return  state = {...initialState, value : {
-                inputs,
-                modal : {...action.payload, show : true}
+                modal : {...action.payload,  show : true},
+                form : {...form}
             }}
         },
         modalNoVisible : (state) => {
-          return state = {...initialState, show : false}
+            const {form} = initialState.value
+          return state = {...initialState, form, show : false}
         },
-        messageInp : (state, action) => { 
-            const {modal, inputs} = initialState.value
-            return state = {...initialState, value : {
-                modal, 
-                inputs : {...inputs, ...action.payload}
-            }}
-        } 
+        setForm : (state, action) => {
+            const {modal} = initialState.value
+            return state = {...initialState, value : {form : {
+                ...action.payload
+            }, modal
+        }}
+        },
+        clearForm : (state) => {
+            return state = {...initialState}
+        }
     }
 })
 
-export const {modalVisible, modalNoVisible, messageInp} = inpAction.actions
+export const {modalVisible, modalNoVisible, setForm, clearForm} = inpAction.actions
 export default inpAction.reducer
